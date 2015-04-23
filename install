@@ -1,0 +1,152 @@
+#!/bin/bash
+
+# Installation file for funstore
+# Coyright mLabs Research Inc., 2014
+
+
+# Basic Settings ####
+VERSION=v0.0.2
+MODIFIED="Sept 15, 2014"
+BINDIR=/usr/bin
+fileName=`basename $0`
+CURL="/usr/bin/curl"
+PHP="/usr/bin/php5"
+APACHE="/usr/sbin/apache2"
+
+checkVersion()
+{
+    if [ "$BASH_VERSION" = '' ]; then
+        clear
+        printf "Error!!!\n\n\nPlease execute \"chmod +x "$fileName"\" and then run \"./"$fileName"\".  \n\n"
+        exit
+    fi
+}
+
+getCurl()
+{
+    if [ -f $CURL ];then echo ""
+    else
+       echo "$CURL command is not installed."
+       echo "Running sudo apt-get install curl"
+       sudo apt-get install curl
+       TEMPVAR = "1";
+    fi
+
+    if [ "$TEMPVAR" = "1" ]; then exit; fi
+}
+
+getApache()
+{
+    if [ -f $APACHE ];then echo ""
+    else
+       echo "$CURL command is not installed."
+       echo "Running sudo apt-get install curl"
+              sudo apt-get install curl
+       TEMPVAR = "1";
+    fi
+
+    if [ "$TEMPVAR" = "1" ]; then exit; fi
+}
+
+getPHP()
+{
+    if [ -f $PHP ];then echo ""
+    else
+       echo "$CURL command is not installed."
+       echo "Running sudo apt-get install curl"
+       sudo apt-get install curl
+       TEMPVAR = "1";
+    fi
+
+    if [ "$TEMPVAR" = "1" ]; then exit; fi
+}
+
+getDependencies()
+{
+sudo apt-get -y install apache2
+sudo apt-get -y install libapache2-mod-php5 libapache2-mod-perl2 php5 php5-cli php5-cgi
+sudo apt-get -y install php5-common php5-curl php5-dev php5-gd
+sudo apt-get -y install php5-imap php5-ldap php5-mhash php5-mysql php5-odbc
+sudo apt-get -y install php5-sqlite
+sudo apt-get -y install msmtp msmtp-mta ca-certificates
+sudo apt-get -y install wget dos2unix
+}
+
+getNode()
+{
+wget http://node-arm.herokuapp.com/node_latest_armhf.deb 
+sudo dpkg -i node_latest_armhf.deb
+sudo rm node_latest_armhf.deb
+sudo apt-get install -y build-essential python-dev python-rpi.gpio
+}
+
+funstoreSetup()
+{
+sudo ifdown wlan0
+sudo ifup wlan0
+cd /var/www
+echo "We will get some files from internet to work for you"
+sudo wget funstore.io/setup/`uname -n`/funstore.tar.gz
+sudo tar -zxvf funstore.tar.gz
+cd funstore/ajax
+sudo touch tmpscript.sh
+sudo chmod 775  tmpscript.sh
+cd ..
+}
+
+editSudoer()
+{
+  sudo echo "\#\!bin/sh" > sudo-change
+  sudo echo "www-data ALL=(ALL) NOPASSWD: ALL" >> sudo-change
+  sudo chmod a+x sudo-change
+  sudo ./sudo-change
+}
+
+getDashboard()
+{
+  cd /var/www/funstore
+  sudo wget funstore.io/setup/`uname -n`/dashboard.tar.gz
+  sudo tar -zxvf dashboard.tar.gz
+}
+
+getGrovePi()
+{
+  cd /var/www/funstore
+  sudo git clone https://github.com/DexterInd/GrovePi
+  cd GrovePi/Script
+  sudo chmod +x install.sh
+  sudo ./install.sh
+}
+
+getWolfram()
+{
+  cd /var/www/funstore
+  sudo git clone https://github.com/funstoreHQ/Wolfram
+  cd Wolfram
+  sudo chmod +x install.sh
+  sudo ./install.sh
+}
+
+changePermission()
+{
+
+}
+
+main()
+{
+clear
+checkVersion
+getCurl
+getApache
+getPHP
+getDependencies
+getNode
+funstoreSetup
+editSudoer
+reboot
+getDashboard
+getGrovePi
+getWolfram
+changePermission
+}
+main
