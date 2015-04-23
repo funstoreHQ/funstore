@@ -28,7 +28,7 @@ getCurl()
     else
        echo "$CURL command is not installed."
        echo "Running sudo apt-get install curl"
-       sudo apt-get install curl
+       sudo apt-get -y install curl
        TEMPVAR = "1";
     fi
 
@@ -41,7 +41,7 @@ getApache()
     else
        echo "$CURL command is not installed."
        echo "Running sudo apt-get install curl"
-              sudo apt-get install apache2
+              sudo apt-get -y install apache2
        TEMPVAR = "1";
     fi
 
@@ -54,7 +54,7 @@ getPHP()
     else
        echo "$CURL command is not installed."
        echo "Running sudo apt-get install curl"
-       sudo apt-get install php5
+       sudo apt-get install -y php5
        TEMPVAR = "1";
     fi
 
@@ -126,11 +126,6 @@ getWolf()
   sudo ./install.sh
 }
 
-changePermission()
-{
-
-}
-
 main()
 {
 clear
@@ -146,6 +141,5 @@ reboot
 getDashboard
 getGrovePi
 getWolf
-changePermission
 }
 main
