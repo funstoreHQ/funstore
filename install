@@ -117,7 +117,6 @@ editSudoer()
   sudo echo "\#\!bin/sh" > sudo-change
   sudo echo "www-data ALL=(ALL) NOPASSWD: ALL" >> sudo-change
   sudo chmod a+x sudo-change
-  sudo ./sudo-change
 }
 
 getDashboard()
