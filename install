@@ -118,11 +118,11 @@ getGrovePi()
   sudo ./install.sh
 }
 
-getWolfram()
+getWolf()
 {
   cd /var/www/funstore
-  sudo git clone https://github.com/funstoreHQ/Wolfram
-  cd Wolfram
+  sudo git clone https://github.com/funstoreHQ/Wolf
+  cd Wolf
   sudo chmod +x install.sh
   sudo ./install.sh
 }
@@ -146,7 +146,7 @@ editSudoer
 reboot
 getDashboard
 getGrovePi
-getWolfram
+getWolf
 changePermission
 }
 main
