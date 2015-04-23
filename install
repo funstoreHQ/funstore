@@ -12,6 +12,7 @@ fileName=`basename $0`
 CURL="/usr/bin/curl"
 PHP="/usr/bin/php5"
 APACHE="/usr/sbin/apache2"
+TEMPVAR=""
 
 checkVersion()
 {
@@ -20,6 +21,12 @@ checkVersion()
         printf "Error!!!\n\n\nPlease execute \"chmod +x "$fileName"\" and then run \"./"$fileName"\".  \n\n"
         exit
     fi
+}
+
+updateAptitude()
+{
+    echo "Updating Aptitude"
+    sudo apt-get -y update
 }
 
 getCurl()
@@ -39,8 +46,8 @@ getApache()
 {
     if [ -f $APACHE ];then echo ""
     else
-       echo "$CURL command is not installed."
-       echo "Running sudo apt-get install curl"
+       echo "$APACHE command is not installed."
+       echo "Running sudo apt-get install apache"
               sudo apt-get -y install apache2
        TEMPVAR = "1";
     fi
@@ -52,8 +59,8 @@ getPHP()
 {
     if [ -f $PHP ];then echo ""
     else
-       echo "$CURL command is not installed."
-       echo "Running sudo apt-get install curl"
+       echo "$PHP command is not installed."
+       echo "Running sudo apt-get install php"
        sudo apt-get install -y php5
        TEMPVAR = "1";
     fi
@@ -63,11 +70,23 @@ getPHP()
 
 getDependencies()
 {
-sudo apt-get -y install libapache2-mod-php5 libapache2-mod-perl2 php5 php5-cli php5-cgi
-sudo apt-get -y install php5-common php5-curl php5-dev php5-gd
-sudo apt-get -y install php5-imap php5-ldap php5-mhash php5-mysql php5-odbc
+sudo apt-get -y install libapache2-mod-php5 
+sudo apt-get -y install libapache2-mod-perl2 
+sudo apt-get -y install php5-cli 
+sudo apt-get -y install php5-cgi
+sudo apt-get -y install php5-common 
+sudo apt-get -y install php5-curl 
+sudo apt-get -y install php5-dev 
+sudo apt-get -y install php5-gd
+sudo apt-get -y install php5-imap 
+sudo apt-get -y install php5-ldap 
+sudo apt-get -y install php5-mhash 
+sudo apt-get -y install php5-mysql 
+sudo apt-get -y install php5-odbc
 sudo apt-get -y install php5-sqlite
-sudo apt-get -y install msmtp msmtp-mta ca-certificates
+sudo apt-get -y install msmtp 
+sudo apt-get -y install msmtp-mta 
+sudo apt-get -y install ca-certificates
 sudo apt-get -y install wget dos2unix
 }
 
@@ -130,6 +149,7 @@ main()
 {
 clear
 checkVersion
+updateAptitude
 getCurl
 getApache
 getPHP
