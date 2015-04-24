@@ -88,6 +88,7 @@ sudo apt-get -y install msmtp
 sudo apt-get -y install msmtp-mta 
 sudo apt-get -y install ca-certificates
 sudo apt-get -y install wget dos2unix
+sudo apt-get -y install avahi-daemon
 }
 
 getNode()
@@ -104,11 +105,13 @@ sudo ifdown wlan0
 sudo ifup wlan0
 cd /var/www
 echo "We will get some files from internet to work for you"
-sudo wget funstore.io/setup/`uname -n`/funstore.tar.gz
-sudo tar -zxvf funstore.tar.gz
+sudo wget funstore.io/setup/`uname -n`/funstore.zip
+sudo unzip funstore.zip
+sudo chmod -fR 755 funstore
 cd funstore/ajax
 sudo touch tmpscript.sh
 sudo chmod 775  tmpscript.sh
+sudo chown -fR www-data:www-data /var/www/funstore
 cd ..
 }
 
@@ -122,8 +125,30 @@ editSudoer()
 getDashboard()
 {
   cd /var/www/funstore
-  sudo wget funstore.io/setup/`uname -n`/dashboard.tar.gz
-  sudo tar -zxvf dashboard.tar.gz
+  sudo wget funstore.io/setup/`uname -n`/dashboard.zip
+  sudo unzip dashboard.zip
+  cd /var/www
+  sudo rm index.html
+  sudo cp /var/www/funstore/dashboard/index-main.html index.html
+  sudo sed -i 's/raspberrypi/funstore/' /etc/hostname
+  sudo sed -i 's/raspberrypi/funstore/' /etc/hosts
+  sudo /etc/init.d/avahi-daemon restart
+  sudo reboot
+}
+
+npmInstall()
+{
+    sudo npm install
+}
+
+nodeSetup()
+{
+    sudo npm install
+}
+
+nodeLaunch()
+{
+    node index.js
 }
 
 getGrovePi()
@@ -155,10 +180,12 @@ getPHP
 getDependencies
 getNode
 funstoreSetup
-editSudoer
 reboot
 getDashboard
 getGrovePi
+npmInstall
 getWolf
+nodeSetup
+nodeLaunch
 }
 main
