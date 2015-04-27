@@ -160,11 +160,11 @@ getGrovePi()
   sudo ./install.sh
 }
 
-getWolf()
+getWL()
 {
   cd /var/www/funstore
-  sudo git clone https://github.com/funstoreHQ/Wolf
-  cd Wolf
+  sudo git clone https://github.com/funstoreHQ/WL
+  cd WL
   sudo chmod +x install.sh
   sudo ./install.sh
 }
@@ -184,7 +184,7 @@ reboot
 getDashboard
 getGrovePi
 npmInstall
-getWolf
+getWL
 nodeSetup
 nodeLaunch
 }
