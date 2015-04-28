@@ -169,6 +169,16 @@ getWL()
   sudo ./install.sh
 }
 
+getjq()
+{
+    sudo git clone https://github.com/stedolan/jq.git
+    cd jq
+    sudo autoreconf -i
+    sudo ./configure
+    sudo make
+    sudo make install
+}
+
 main()
 {
 clear
@@ -185,6 +195,7 @@ getDashboard
 getGrovePi
 npmInstall
 getWL
+getjq
 nodeSetup
 nodeLaunch
 }
