@@ -131,7 +131,6 @@ getDashboard()
   sudo sed -i 's/raspberrypi/funstore/' /etc/hostname
   sudo sed -i 's/raspberrypi/funstore/' /etc/hosts
   sudo /etc/init.d/avahi-daemon restart
-  sudo reboot
 }
 
 npmInstall()
@@ -166,8 +165,8 @@ getWL()
   cd /var/www/funstore
   sudo wget funstore.io/setup/$BOARD/WL.tar.gz
   sudo tar -zxvf WL.tar.gz
-  sudo chmod +x install.sh
-  sudo ./install.sh
+  sudo chmod +x install
+  sudo ./install
 }
 
 getjq()
