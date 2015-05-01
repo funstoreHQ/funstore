@@ -148,7 +148,7 @@ nodeSetup()
 nodeLaunch()
 {
     cd /var/www/funstore
-    node devices.js
+    node device.js
 }
 
 getGrovePi()
