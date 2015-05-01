@@ -148,7 +148,8 @@ nodeSetup()
 
 nodeLaunch()
 {
-    node index.js
+    cd /var/www/funstore
+    sudo chmod a+x /etc/init.d/funstore-boot.sh
 }
 
 getGrovePi()
@@ -192,13 +193,13 @@ getApache
 getPHP
 getDependencies
 getNode
+funstoreSetup
 npmInstall
 getWL
 getjq
 nodeSetup
 nodeLaunch
-funstoreSetup
-getGrovePi
 getDashboard
+getGrovePi
 }
 main
