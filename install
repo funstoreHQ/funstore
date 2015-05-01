@@ -13,6 +13,7 @@ fileName=`basename $0`
 CURL="/usr/bin/curl"
 PHP="/usr/bin/php5"
 APACHE="/usr/sbin/apache2"
+JQ="/usr/local/bin/jq"
 TEMPVAR=""
 
 checkVersion()
@@ -102,8 +103,6 @@ sudo apt-get install -y build-essential python-dev python-rpi.gpio
 
 funstoreSetup()
 {
-sudo ifdown wlan0
-sudo ifup wlan0
 cd /var/www
 echo "We will get some files from internet to work for you"
 sudo wget funstore.io/setup/$BOARD/funstore.zip
@@ -172,12 +171,15 @@ getWL()
 
 getjq()
 {
+    if [ -f $JQ ];then echo ""
+    else
     sudo git clone https://github.com/stedolan/jq.git
     cd jq
     sudo autoreconf -i
     sudo ./configure
     sudo make
     sudo make install
+    fi
 }
 
 main()
