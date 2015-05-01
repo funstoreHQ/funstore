@@ -142,13 +142,13 @@ npmInstall()
 nodeSetup()
 {
     cd /var/www/funstore/
-    sudo npm install
+    npm install
 }
 
 nodeLaunch()
 {
     cd /var/www/funstore
-    sudo node devices.js
+    node devices.js
 }
 
 getGrovePi()
