@@ -117,9 +117,7 @@ cd ..
 
 editSudoer()
 {
-  sudo echo "\#\!bin/sh" > sudo-change
-  sudo echo "www-data ALL=(ALL) NOPASSWD: ALL" >> sudo-change
-  sudo chmod a+x sudo-change
+  #to be completed
 }
 
 getDashboard()
@@ -138,7 +136,8 @@ getDashboard()
 
 npmInstall()
 {
-    sudo npm install
+    cd /var/www/funstore/
+    sudo npm install 
 }
 
 nodeSetup()
@@ -163,8 +162,8 @@ getGrovePi()
 getWL()
 {
   cd /var/www/funstore
-  sudo git clone https://github.com/funstoreHQ/WL
-  cd WL
+  sudo wget funstore.io/setup/`uname -n`/WL.tar.gz
+  sudo tar -zxvf WL.tar.gz
   sudo chmod +x install.sh
   sudo ./install.sh
 }
@@ -189,14 +188,13 @@ getApache
 getPHP
 getDependencies
 getNode
-funstoreSetup
-reboot
-getDashboard
-getGrovePi
 npmInstall
 getWL
 getjq
 nodeSetup
 nodeLaunch
+funstoreSetup
+getGrovePi
+getDashboard
 }
 main
