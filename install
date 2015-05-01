@@ -148,7 +148,7 @@ nodeSetup()
 nodeLaunch()
 {
     cd /var/www/funstore
-    sudo chmod a+x /etc/init.d/funstore-boot.sh
+    sudo node devices.js
 }
 
 getGrovePi()
@@ -197,6 +197,7 @@ npmInstall
 getWL
 getjq
 nodeSetup
+echo "If you can see connected on your online account, this means all is well"
 nodeLaunch
 getDashboard
 getGrovePi
