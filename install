@@ -201,5 +201,6 @@ echo "If you can see connected on your online account, this means all is well"
 nodeLaunch
 getDashboard
 getGrovePi
+sudo chown -fR www-data:www-data /var/www
 }
 main
