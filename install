@@ -6,6 +6,7 @@
 
 # Basic Settings ####
 VERSION=v0.0.2
+BOARD="raspberrypi"
 MODIFIED="Sept 15, 2014"
 BINDIR=/usr/bin
 fileName=`basename $0`
@@ -105,7 +106,7 @@ sudo ifdown wlan0
 sudo ifup wlan0
 cd /var/www
 echo "We will get some files from internet to work for you"
-sudo wget funstore.io/setup/`uname -n`/funstore.zip
+sudo wget funstore.io/setup/$BOARD/funstore.zip
 sudo unzip funstore.zip
 sudo chmod -fR 755 funstore
 cd funstore/ajax
@@ -123,7 +124,7 @@ editSudoer()
 getDashboard()
 {
   cd /var/www/funstore
-  sudo wget funstore.io/setup/`uname -n`/dashboard.zip
+  sudo wget funstore.io/setup/$BOARD/dashboard.zip
   sudo unzip dashboard.zip
   cd /var/www
   sudo rm index.html
@@ -142,6 +143,7 @@ npmInstall()
 
 nodeSetup()
 {
+    cd /var/www/funstore/
     sudo npm install
 }
 
@@ -162,7 +164,7 @@ getGrovePi()
 getWL()
 {
   cd /var/www/funstore
-  sudo wget funstore.io/setup/`uname -n`/WL.tar.gz
+  sudo wget funstore.io/setup/$BOARD/WL.tar.gz
   sudo tar -zxvf WL.tar.gz
   sudo chmod +x install.sh
   sudo ./install.sh
