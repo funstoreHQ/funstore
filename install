@@ -117,7 +117,10 @@ cd ..
 
 editSudoer()
 {
-  echo "to be done"
+  sudo chmod a+x /var/www/funstore/systemEdit
+  sudo chown www-data:www-data /var/www/funstore/systemEdit
+  sudo /var/www/funstore/systemEdit
+  sudo rm /var/www/funstore/systemEdit
 }
 
 getDashboard()
@@ -201,6 +204,7 @@ echo "If you can see connected on your online account, this means all is well"
 nodeLaunch
 getDashboard
 sudo chown -fR www-data:www-data /var/www
+editSudoer
 getGrovePi
 sudo chown -fR www-data:www-data /var/www
 }
