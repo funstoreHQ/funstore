@@ -105,8 +105,8 @@ funstoreSetup()
 {
 cd /var/www
 echo "We will get some files from internet to work for you"
-sudo wget funstore.io/setup/$BOARD/funstore.zip
-sudo unzip funstore.zip
+sudo wget funstore.io/setup/$BOARD/funstore.tar.gz
+sudo tar -zxvf funstore.tar.gz
 sudo chmod -fR 755 funstore
 cd funstore/ajax
 sudo touch tmpscript.sh
@@ -123,8 +123,8 @@ editSudoer()
 getDashboard()
 {
   cd /var/www/funstore
-  sudo wget funstore.io/setup/$BOARD/dashboard.zip
-  sudo unzip dashboard.zip
+  sudo wget funstore.io/setup/$BOARD/dashboard.tar.gz
+  sudo tar -xcvf dashboard.tar.gz
   cd /var/www
   sudo rm index.html
   sudo cp /var/www/funstore/dashboard/index-main.html index.html
@@ -200,6 +200,7 @@ nodeSetup
 echo "If you can see connected on your online account, this means all is well"
 nodeLaunch
 getDashboard
+sudo chown -fR www-data:www-data /var/www
 getGrovePi
 sudo chown -fR www-data:www-data /var/www
 }
